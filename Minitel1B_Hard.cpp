@@ -503,7 +503,13 @@ void Minitel::print(String chaine) {
   unsigned int i = 0;
   while (i < chaine.length()) {
     unsigned long code = (byte) chaine.charAt(i++);
-    if (code < SP) code = 0;
+    if( code == 0xA ){
+      println();
+      code = 0;
+    }
+    else if (code < SP){
+      code = 0;
+    }
     else if (code >= SP && code <= DEL) {
       switch (code) {
         case 0x5E: code = 0; break; // ^ non visualisable seul
